@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jarurat Care Foundation | AI-Enabled Healthcare Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-white">
+
+    <!-- Navbar -->
+    <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-emerald-500 text-slate-950 font-black p-2 rounded-xl text-lg tracking-wider shadow-md">JC</div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight text-white">Jarurat Care Foundation</h1>
+                    <p class="text-xs text-emerald-400 font-medium tracking-wide">Full-Stack AI Healthcare Support Portal</p>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center space-x-2 bg-slate-900 px-3 py-1.5 rounded-full border border-slate-700 text-xs text-slate-300">
+                <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Backend Node.js & AI Engine Active</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-2 gap-8 flex-grow w-full">
+        
+        <!-- Left Column: Patient / Volunteer Form -->
+        <section class="bg-slate-800/80 backdrop-blur-md p-8 rounded-3xl border border-slate-700 shadow-xl flex flex-col justify-between">
+            <div>
+                <div class="mb-6">
+                    <span class="bg-emerald-500/10 text-emerald-400 text-xs px-3 py-1 rounded-full font-semibold border border-emerald-500/20">Module 01</span>
+                    <h2 class="text-2xl font-bold text-white mt-2">Support & Registration Intake</h2>
+                    <p class="text-sm text-slate-400 mt-1">Submit patient support requests or volunteer applications processed by our backend API[cite: 1].</p>
+                </div>
+                
+                <form id="intakeForm" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Full Name</label>
+                        <input type="text" id="fullName" required placeholder="Enter your full name" class="w-full bg-slate-900 border border-slate-700 px-4 py-3 rounded-xl text-white focus:outline-none focus:border-emerald-500 transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Email Address</label>
+                        <input type="email" id="email" required placeholder="name@example.com" class="w-full bg-slate-900 border border-slate-700 px-4 py-3 rounded-xl text-white focus:outline-none focus:border-emerald-500 transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Select Role</label>
+                        <select id="roleType" class="w-full bg-slate-900 border border-slate-700 px-4 py-3 rounded-xl text-white focus:outline-none focus:border-emerald-500 transition">
+                            <option value="Patient Support">Patient / Medical Support Seeker</option>
+                            <option value="Volunteer">Healthcare Volunteer</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Message / Requirements</label>
+                        <textarea id="message" rows="3" required placeholder="Describe how we can assist you..." class="w-full bg-slate-900 border border-slate-700 px-4 py-3 rounded-xl text-white focus:outline-none focus:border-emerald-500 transition"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3.5 rounded-xl shadow-lg transition duration-200">
+                        Submit via Backend API 🚀
+                    </button>
+                </form>
+            </div>
+
+            <!-- Response Alert Box -->
+            <div id="responseBox" class="hidden mt-6 p-4 bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 rounded-2xl text-xs space-y-1">
+                <p class="font-bold flex items-center space-x-1"><span>✅</span> <span>Backend Response Recorded Successfully:</span></p>
+                <p id="summaryText" class="text-slate-300"></p>
+            </div>
+        </section>
+
+        <!-- Right Column: AI Assistant & Automation Console -->
+        <section class="bg-slate-800/80 backdrop-blur-md p-8 rounded-3xl border border-slate-700 shadow-xl flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <span class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1 rounded-full font-semibold border border-blue-500/20">Module 02</span>
+                        <h2 class="text-2xl font-bold text-white mt-2">AI & Automation Engine</h2>
+                    </div>
+                    <span class="flex h-3 w-3 relative">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                    </span>
+                </div>
+
+                <!-- Chat Feed -->
+                <div id="chatFeed" class="bg-slate-900 border border-slate-700 rounded-2xl p-4 h-72 overflow-y-auto space-y-3 mb-4 text-sm">
+                    <div class="flex items-start space-x-3">
+                        <div class="bg-emerald-500 text-slate-950 font-bold rounded-full h-7 w-7 flex items-center justify-center flex-shrink-0 text-xs">AI</div>
+                        <div class="bg-slate-800 p-3.5 rounded-2xl border border-slate-700 text-slate-200 max-w-[85%] text-xs">
+                            Hello Jaswanth! I am the Jarurat Care backend assistant. Ask me anything about our healthcare camps or test the intake form[cite: 1]!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Controls -->
+            <div class="space-y-3">
+                <div class="flex space-x-2">
+                    <input type="text" id="chatInput" placeholder="Ask a question (e.g., Where are camps held?)..." class="flex-grow bg-slate-900 border border-slate-700 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500">
+                    <button id="sendBtn" class="bg-slate-700 hover:bg-slate-600 text-white px-5 py-3 rounded-xl text-xs font-bold transition">Send</button>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button class="quick-btn text-[11px] bg-slate-900 hover:bg-slate-700 border border-slate-700 text-slate-300 px-3 py-1.5 rounded-full transition">Where are medical camps held?</button>
+                    <button class="quick-btn text-[11px] bg-slate-900 hover:bg-slate-700 border border-slate-700 text-slate-300 px-3 py-1.5 rounded-full transition">How to become a volunteer?</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 border-t border-slate-700 py-4 text-center text-xs text-slate-400">
+        Jarurat Care Foundation Full-Stack Internship Assignment • Built with Node.js, Express & Tailwind CSS[cite: 1]
+    </footer>
+
+    <!-- Client Script -->
+    <script>
+        // Handle Form Submission to Express Backend
+        document.getElementById('intakeForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const payload = {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                roleType: document.getElementById('roleType').value,
+                message: document.getElementById('message').value
+            };
+
+            try {
+                const res = await fetch('/api/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                
+                if (data.success) {
+                    const box = document.getElementById('responseBox');
+                    box.classList.remove('hidden');
+                    document.getElementById('summaryText').textContent = data.data.aiSummary;
+
+                    // Also add summary card to chat
+                    appendMessage('AI Engine', data.data.aiSummary, true);
+                }
+            } catch (err) {
+                alert('Error connecting to backend server.');
+            }
+        });
+
+        // Handle Chat with Backend API
+        async function sendQuery(queryText) {
+            appendMessage('You', queryText, false);
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query: queryText })
+                });
+                const data = await res.json();
+                appendMessage('AI', data.reply, true);
+            } catch (err) {
+                appendMessage('AI', 'Server connection error.', true);
+            }
+        }
+
+        function appendMessage(sender, text, isAi) {
+            const feed = document.getElementById('chatFeed');
+            const alignment = isAi ? 'items-start' : 'items-end justify-end';
+            const bg = isAi ? 'bg-slate-800 border border-slate-700 text-slate-200' : 'bg-emerald-500 text-slate-950 font-medium';
+            const avatarBg = isAi ? 'bg-emerald-500 text-slate-950' : 'bg-slate-700 text-white';
+
+            const html = `
+                <div class="flex ${alignment} space-x-2">
+                    ${isAi ? `<div class="${avatarBg} font-bold rounded-full h-6 w-6 flex items-center justify-center flex-shrink-0 text-[10px]">AI</div>` : ''}
+                    <div class="${bg} p-3 rounded-2xl max-w-[80%] text-xs shadow-sm">
+                        ${text}
+                    </div>
+                </div>
+            `;
+            feed.insertAdjacentHTML('beforeend', html);
+            feed.scrollTop = feed.scrollHeight;
+        }
+
+        document.getElementById('sendBtn').addEventListener('click', () => {
+            const input = document.getElementById('chatInput');
+            if(input.value.trim()) {
+                sendQuery(input.value);
+                input.value = '';
+            }
+        });
+
+        document.getElementById('chatInput').addEventListener('keypress', (e) => {
+            if(e.key === 'Enter' && e.target.value.trim()) {
+                sendQuery(e.target.value);
+                e.target.value = '';
+            }
+        });
+
+        document.querySelectorAll('.quick-btn').forEach(btn => {
+            btn.addEventListener('click', () => sendQuery(btn.textContent));
+        });
+    </script>
+</body>
+</html>
